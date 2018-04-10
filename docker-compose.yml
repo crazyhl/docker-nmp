@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    # 基础镜像
+    image: "nginx:alpine"
+    # 端口映射 本机端口:docker 端口
+    ports:
+     - "81:80"
+    # 文件挂载  本地目录: docker 目录 后面的 ro 设置为只读
+    volumes:
+     #配置目录
+     - ./nginx/conf.d:/etc/nginx/conf.d:ro
+     #默认首页目录
+     - ./nginx/html:/usr/share/nginx/html:ro
+     #默认日志目录
+     - ./nginx/log:/var/log/nginx
