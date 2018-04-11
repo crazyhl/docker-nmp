@@ -1,1 +1,3 @@
 /nginx/log/*.log
+/db/data/*
+!/db/data/.gitkeep
