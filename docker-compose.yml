@@ -14,6 +14,8 @@ services:
      - ./nginx/html:/etc/nginx/html:ro
      #默认日志目录
      - ./nginx/log:/var/log/nginx
+     # 项目路径
+     - ./code:/var/www/
     depends_on:
       - php
     restart: always
@@ -21,8 +23,8 @@ services:
     build: ./php
     restart: always
     volumes:
-      # php项目路径
-      - ./code:/usr/share/nginx/html
+      # 项目路径
+      - ./code:/var/www/
     depends_on:
       - mysql
   mysql:
