@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     # 基础镜像
-    image: "nginx:alpine"
+    image: "nginx:latest"
     # 端口映射 本机端口:docker 端口
     ports:
      - "81:80"
@@ -28,7 +28,7 @@ services:
     depends_on:
       - mysql
   mysql:
-    image: "mysql:5"
+    image: "mysql:latest"
     ports:
       - "33060:3306"
     restart: always
