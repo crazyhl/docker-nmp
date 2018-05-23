@@ -1,19 +1,19 @@
 FROM php:7-fpm-alpine3.7
 # re2c 是 reids 用的 不要删除
-RUN apk update \
-    && apk add --no-cache autoconf g++ gcc make file re2c \
-    &&curl -fsSL 'http://pecl.php.net/get/redis-4.0.0.tgz' -o redis-4.0.0.tgz \
-    && mkdir -p redis \
-    && tar -xf redis-4.0.0.tgz -C redis --strip-components=1 \
-    && rm redis-4.0.0.tgz \
-    && ( \
-        cd redis \
-        && phpize \
-        && ./configure \
-        && make -j$(nproc) \
-        && make install \
-    ) \
-    && rm -r redis \
-    && docker-php-ext-enable redis \
-    && docker-php-ext-install pdo_mysql \
-    && apk del autoconf g++ gcc make file \
+# RUN apk update \
+#     && apk add --no-cache autoconf g++ gcc make file re2c \
+#     &&curl -fsSL 'http://pecl.php.net/get/redis-4.0.0.tgz' -o redis-4.0.0.tgz \
+#     && mkdir -p redis \
+#     && tar -xf redis-4.0.0.tgz -C redis --strip-components=1 \
+#     && rm redis-4.0.0.tgz \
+#     && ( \
+#         cd redis \
+#         && phpize \
+#         && ./configure \
+#         && make -j$(nproc) \
+#         && make install \
+#     ) \
+#     && rm -r redis \
+#     && docker-php-ext-enable redis \
+#     && docker-php-ext-install pdo_mysql \
+#     && apk del autoconf g++ gcc make file \
