@@ -5,7 +5,7 @@ services:
     image: "nginx:latest"
     # 端口映射 本机端口:docker 端口
     ports:
-     - "81:80"
+     - "80:80"
     # 文件挂载  本地目录: docker 目录 后面的 ro 设置为只读
     volumes:
      #配置目录
@@ -28,10 +28,12 @@ services:
     depends_on:
       - mysql
   mysql:
-    image: "mysql:latest"
+    image: "mysql:5"
     ports:
       - "33060:3306"
     restart: always
+    volumes:
+      - $PWD/db/data/:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 123456789
       MYSQL_USER: crazyhl

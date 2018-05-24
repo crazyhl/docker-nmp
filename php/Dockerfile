@@ -1,4 +1,6 @@
 FROM php:fpm
+# 安装 MySQL pdo
+RUN docker-php-ext-install pdo_mysql
 # re2c 是 reids 用的 不要删除
 # RUN apk update \
 #     && apk add --no-cache autoconf g++ gcc make file re2c \
