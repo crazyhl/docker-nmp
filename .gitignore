@@ -5,3 +5,5 @@
 */.DS_Store
 /code/*
 !/code/.gitkeep
+/nginx/conf.d/*
+!/nginx/conf.d/default.conf
