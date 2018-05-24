@@ -11,3 +11,5 @@ try {
 }
 
 echo "string";
+
+phpinfo();
