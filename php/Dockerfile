@@ -1,4 +1,5 @@
 FROM php:fpm
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # 安装 MySQL pdo
 RUN docker-php-ext-install pdo_mysql
 # re2c 是 reids 用的 不要删除
