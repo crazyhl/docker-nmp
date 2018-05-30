@@ -25,6 +25,7 @@ services:
     volumes:
       # 项目路径
       - ./code:/var/www/
+      - ./php/conf/php.ini:/usr/local/etc/php/php.ini:ro
     depends_on:
       - mysql
   mysql:
