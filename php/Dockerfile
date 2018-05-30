@@ -1,5 +1,8 @@
 FROM php:fpm
+# 安装 comopser
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# 设置国内镜像
+RUN composer config -g repo.packagist composer https://packagist.phpcomposer.com
 # 安装 MySQL pdo
 RUN docker-php-ext-install pdo_mysql
 # re2c 是 reids 用的 不要删除
