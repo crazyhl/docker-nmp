@@ -13,9 +13,9 @@ services:
      #默认首页目录
      - ./nginx/html:/etc/nginx/html:ro
      #默认日志目录
-     - ./nginx/log:/var/log/nginx
+     - ./nginx/log:/var/log/nginx:cached
      # 项目路径
-     - ./code:/var/www/
+     - ./code:/var/www/:cached
     depends_on:
       - php
     restart: always
@@ -24,7 +24,7 @@ services:
     restart: always
     volumes:
       # 项目路径
-      - ./code:/var/www/
+      - ./code:/var/www/:cached
       - ./php/conf/php.ini:/usr/local/etc/php/php.ini:ro
     depends_on:
       - mysql
@@ -34,7 +34,7 @@ services:
       - "33060:3306"
     restart: always
     volumes:
-      - $PWD/db/data/:/var/lib/mysql
+      - $PWD/db/data/:/var/lib/mysql:cached
     environment:
       MYSQL_ROOT_PASSWORD: 123456789
       MYSQL_USER: crazyhl
