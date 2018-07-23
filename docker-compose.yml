@@ -9,7 +9,7 @@ services:
     # 文件挂载  本地目录: docker 目录 后面的 ro 设置为只读
     volumes:
      #配置目录
-     - ./nginx/conf.d:/etc/nginx/conf.d:ro
+     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
      #默认首页目录
      - ./nginx/html:/etc/nginx/html:ro
      #默认日志目录
@@ -26,16 +26,16 @@ services:
       # 项目路径
       - ./code:/var/www/:cached
       - ./php/conf/php.ini:/usr/local/etc/php/php.ini:ro
-    depends_on:
-      - mysql
-  mysql:
-    image: "mysql:5"
-    ports:
-      - "33060:3306"
-    restart: always
-    volumes:
-      - $PWD/db/data/:/var/lib/mysql:cached
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456789
-      MYSQL_USER: crazyhl
-      MYSQL_PASSWORD: 123456789
+  #   depends_on:
+  #     - mysql
+  # mysql:
+  #   image: "mysql:5"
+  #   ports:
+  #     - "33060:3306"
+  #   restart: always
+  #   volumes:
+  #     - $PWD/db/data/:/var/lib/mysql:cached
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: 123456789
+  #     MYSQL_USER: crazyhl
+  #     MYSQL_PASSWORD: 123456789
