@@ -7,3 +7,6 @@
 !/code/.gitkeep
 /nginx/conf.d/*
 !/nginx/conf.d/default.conf
+/redis/data/*
+!/redis/data/.gitkeep
+

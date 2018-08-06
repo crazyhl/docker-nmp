@@ -1,7 +1,7 @@
 <?php
 
-$dsn = 'mysql:dbname=db;host=172.18.0.1;port=33060';
-$user = 'crazyhl';
+$dsn = 'mysql:dbname=sys;host=mysql;port=3306';
+$user = 'root';
 $password = '123456789';
 
 try {
