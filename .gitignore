@@ -9,4 +9,4 @@
 !/nginx/conf.d/default.conf
 /redis/data/*
 !/redis/data/.gitkeep
-
+/php/log/*.log

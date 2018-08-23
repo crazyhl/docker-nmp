@@ -32,19 +32,19 @@ services:
       # 配置目录
       - ./php/conf/php.ini:/usr/local/etc/php/php.ini:ro
       - ./php/conf/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
-      - ./php/conf/php-fpm.d:/usr/local/etc/php-fpm.d:ro
+      - ./php/conf/php-fpm.d:/usr/local/etc/php-fpm.d:rw
       # crontab
       - ./php/crontab/crontab:/etc/cron.d/cron
       # log root
       - ./php/log:/var/log/php
       # www root
       - ./www:/var/www/
-    command:
-      - /bin/sh
-      - -c
-      - |
-        php -v
-        chmod 0644 /etc/cron.d/cron
-        crontab /etc/cron.d/cron
-        cron
-        php-fpm
+    # command:
+    #   - /bin/sh
+    #   - -c
+    #   - |
+    #     php -v
+    #     chmod 0644 /etc/cron.d/cron
+    #     crontab /etc/cron.d/cron
+    #     cron
+    #     php-fpm
