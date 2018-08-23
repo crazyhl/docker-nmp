@@ -1,50 +1,50 @@
 version: '3'
 services:
-  web:
-    # 基础镜像
-    image: "nginx:latest"
+  nginx:
+    build: ./nginx
+    restart: always
     # 端口映射 本机端口:docker 端口
     ports:
-     - "80:80"
+      - "80:80"
+      - "443:443"
     # 文件挂载  本地目录: docker 目录 后面的 ro 设置为只读
     volumes:
-     #配置目录
-     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-     #配置目录
-     - ./nginx/conf.d:/etc/nginx/conf.d:ro
-     #默认首页目录
-     - ./nginx/html:/etc/nginx/html:ro
-     #默认日志目录
-     - ./nginx/log:/var/log/nginx
-     # 项目路径
-     - ./code:/var/www/
+      # 配置文件
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf/fastcgi.conf:/etc/nginx/fastcgi.conf:ro
+      - ./nginx/conf/expires.conf:/etc/nginx/expires.conf:ro
+      # ssl 证书目录
+      # - ./nginx/conf/ssl:/etc/nginx/ssl:ro
+      # 虚拟主机目录
+      - ./nginx/conf/vhost.d:/etc/nginx/vhost.d:ro
+      # 默认首页目录
+      - ./nginx/html:/etc/nginx/html:ro
+      # log root
+      - ./nginx/log:/var/log/nginx
+      # www root
+      - ./www:/var/www/
     depends_on:
       - php
-    restart: always
   php:
     build: ./php
     restart: always
     volumes:
-      # 项目路径
-      - ./code:/var/www/
+      # 配置目录
       - ./php/conf/php.ini:/usr/local/etc/php/php.ini:ro
-    # depends_on:
-    #   - mysql
-    #   - redis
-  mysql:
-    image: "mysql:5"
-    ports:
-      - "33060:3306"
-    restart: always
-    volumes:
-      - $PWD/db/data/:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456789
-      MYSQL_USER: crazyhl
-      MYSQL_PASSWORD: 123456789
-  redis:
-    image: "redis:latest"
-    ports:
-      - "63790:6379"
-    volumes:
-      - $PWD/redis/data/:/data
+      - ./php/conf/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
+      - ./php/conf/php-fpm.d:/usr/local/etc/php-fpm.d:ro
+      # crontab
+      - ./php/crontab/crontab:/etc/cron.d/cron
+      # log root
+      - ./php/log:/var/log/php
+      # www root
+      - ./www:/var/www/
+    command:
+      - /bin/sh
+      - -c
+      - |
+        php -v
+        chmod 0644 /etc/cron.d/cron
+        crontab /etc/cron.d/cron
+        cron
+        php-fpm
