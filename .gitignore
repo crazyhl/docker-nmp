@@ -9,4 +9,6 @@
 !/nginx/conf.d/default.conf
 /redis/data/*
 !/redis/data/.gitkeep
+/mysql/data/*
+!/mysql/data/.gitkeep
 /php/log/*.log

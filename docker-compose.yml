@@ -48,3 +48,16 @@ services:
     #     crontab /etc/cron.d/cron
     #     cron
     #     php-fpm
+  # mysql:
+  #   build: ./mysql
+  #   ports:
+  #     - "33060:3306"
+  #   restart: always
+  #   volumes:
+  #     - $PWD/mysql/data/:/var/lib/mysql
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: 123456789
+  #     MYSQL_USER: crazyhl
+  #     MYSQL_PASSWORD: 123456789
+  # redis:
+  #   build: ./redis
