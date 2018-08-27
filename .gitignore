@@ -5,10 +5,12 @@
 */.DS_Store
 /code/*
 !/code/.gitkeep
-/nginx/conf.d/*
-!/nginx/conf.d/default.conf
+/nginx/vhost.d/*
+!/nginx/vhost.d/default.conf
 /redis/data/*
 !/redis/data/.gitkeep
 /mysql/data/*
 !/mysql/data/.gitkeep
 /php/log/*.log
+/www/*
+!/www/.gitkeep
