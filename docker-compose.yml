@@ -27,7 +27,7 @@ services:
       - php
     networks:
       mynet:
-        ipv4_address: 172.28.0.3
+        ipv4_address: 172.28.12.3
   php:
     build: ./php
     restart: always
@@ -47,7 +47,7 @@ services:
       - redis
     networks:
       mynet:
-        ipv4_address: 172.28.0.4
+        ipv4_address: 172.28.12.4
     # command:
     #   - /bin/sh
     #   - -c
@@ -70,18 +70,18 @@ services:
       MYSQL_PASSWORD: 123456789
     networks:
       mynet:
-        ipv4_address: 172.28.0.5
+        ipv4_address: 172.28.12.5
   redis:
     build: ./redis
     volumes:
       - $PWD/redis/data/:/data
     networks:
       mynet:
-        ipv4_address: 172.28.0.6
+        ipv4_address: 172.28.12.6
 networks:
   mynet:
     ipam:
       driver: default
       config:
-        - subnet: 172.28.0.0/24
+        - subnet: 172.28.12.0/24
             
