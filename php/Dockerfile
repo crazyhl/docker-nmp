@@ -1,6 +1,6 @@
 FROM php:fpm
 
-#  设置时区
+# 设置时区
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -11,7 +11,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # && composer config -g repo.packagist composer https://packagist.phpcomposer.com \
 # && apt-get install -y cron \
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
-    && apt-get update && apt-get install -y gcc libicu-dev g++ git zip unzip zlib1g-dev libmagick++-dev libmemcached-dev curl libcurl3-dev libcurl4-openssl-dev libmcrypt-dev libgmp-dev libssl-dev libc-client-dev libkrb5-dev libedit-dev librecode-dev librecode0 librecode-dev libsnmp-dev libxml2-dev --no-install-recommends && rm -r /var/lib/apt/lists/* \
+    && apt-get update && apt-get install -y cron gcc libicu-dev g++ git zip unzip zlib1g-dev libmagick++-dev libmemcached-dev curl libcurl3-dev libcurl4-openssl-dev libmcrypt-dev libgmp-dev libssl-dev libc-client-dev libkrb5-dev libedit-dev librecode-dev librecode0 librecode-dev libsnmp-dev libxml2-dev --no-install-recommends && rm -r /var/lib/apt/lists/* \
     && CFLAGS="-I/usr/src/php" \
     && docker-php-ext-configure hash --with-mhash \
     && docker-php-ext-configure intl \
@@ -23,9 +23,13 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && pecl install memcached \
     && docker-php-ext-enable opcache \
     && groupadd -g 500 www \
-    && useradd -u 500 -g www -s /sbin/nologin www
+    && useradd -u 500 -g www -s /sbin/nologin www \
+    && mkdir -p /etc/cron.d/ \
+    && touch /etc/cron.d/cron \
+    && chmod 0644 /etc/cron.d/cron
 
-# Create the log file to be able to run tail
-# ADD ./crontab/crontab /etc/cron.d/cron
-# RUN chmod 0644 /etc/cron.d/cron
-# RUN touch /var/log/php/crontab.log
+COPY entrypoint.sh /usr/local/bin/
+
+RUN chmod 777 /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

@@ -1,1 +1,1 @@
-*/1 * * * * root date >> /var/log/php/crontab.log 2>&1
+*/1 * * * * echo "ads" >> /var/log/php/crontab.log 2>&1

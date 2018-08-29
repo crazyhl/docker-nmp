@@ -48,15 +48,6 @@ services:
     networks:
       mynet:
         ipv4_address: 172.28.12.4
-    # command:
-    #   - /bin/sh
-    #   - -c
-    #   - |
-    #     php -v
-    #     chmod 0644 /etc/cron.d/cron
-    #     crontab /etc/cron.d/cron
-    #     cron
-    #     php-fpm
   mysql:
     build: ./mysql
     ports:
