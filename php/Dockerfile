@@ -6,6 +6,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # 安装 comopser
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# 拷贝 入口文件
+COPY entrypoint.sh /usr/local/bin/
+# 拷贝 阿里云源
+COPY ./conf/source.ustc.list /etc/apt/sources.list
 # composer 设置国内镜像 安装 MySQL pdo
 
 # && composer config -g repo.packagist composer https://packagist.phpcomposer.com \
@@ -26,10 +30,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && useradd -u 500 -g www -s /sbin/nologin www \
     && mkdir -p /etc/cron.d/ \
     && touch /etc/cron.d/cron \
-    && chmod 0644 /etc/cron.d/cron
-
-COPY entrypoint.sh /usr/local/bin/
-
-RUN chmod 777 /usr/local/bin/entrypoint.sh
+    && chmod 0644 /etc/cron.d/cron \
+    && chmod 777 /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
