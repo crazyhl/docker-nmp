@@ -9,12 +9,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # 拷贝 入口文件
 COPY entrypoint.sh /usr/local/bin/
 # 拷贝 阿里云源
-COPY ./conf/source.ustc.list /etc/apt/sources.list
+# COPY ./conf/source.ali.list /etc/apt/sources.list
 # composer 设置国内镜像 安装 MySQL pdo
 
-# && composer config -g repo.packagist composer https://packagist.phpcomposer.com \
+
 # && apt-get install -y cron \
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
+    && composer config -g repo.packagist composer https://packagist.phpcomposer.com \
     && apt-get update && apt-get install -y libzip-dev zip cron gcc libicu-dev g++ git zip unzip zlib1g-dev libmagick++-dev libmemcached-dev curl libcurl3-dev libcurl4-openssl-dev libmcrypt-dev libgmp-dev libssl-dev libc-client-dev libkrb5-dev libedit-dev librecode-dev librecode0 librecode-dev libsnmp-dev libxml2-dev --no-install-recommends && rm -r /var/lib/apt/lists/* \
     && CFLAGS="-I/usr/src/php" \
     && docker-php-ext-configure hash --with-mhash \
@@ -22,7 +23,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install bcmath bz2 calendar exif gd gettext gmp mysqli opcache pcntl pdo_mysql recode shmop soap sockets sysvmsg sysvsem sysvshm wddx xmlrpc zip \
     # && pecl install igbinary \
-    && curl -fsSL 'https://github.com/igbinary/igbinary/archive/2.0.7.tar.gz' -o igbinary.tar.gz \
+    && curl -fsSL 'https://github.com/igbinary/igbinary/archive/2.0.8.tar.gz' -o igbinary.tar.gz \
     && mkdir -p igbinary \
     && tar -xf igbinary.tar.gz -C igbinary --strip-components=1 \
     && rm igbinary.tar.gz \
@@ -35,7 +36,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     ) \
     && rm -r igbinary \
     # && pecl install msgpack \
-    && curl -fsSL 'https://github.com/msgpack/msgpack-php/archive/msgpack-2.0.2.tar.gz' -o msgpack-2.0.2.tar.gz \
+    && curl -fsSL 'https://github.com/msgpack/msgpack-php/archive/msgpack-2.0.3.tar.gz' -o msgpack-2.0.2.tar.gz \
     && mkdir -p msgpack \
     && tar -xf msgpack-2.0.2.tar.gz -C msgpack --strip-components=1 \
     && rm msgpack-2.0.2.tar.gz \
@@ -48,7 +49,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     ) \
     && rm -r msgpack \
     # && pecl install redis \
-    && curl -fsSL 'https://github.com/phpredis/phpredis/archive/4.1.1.tar.gz' -o redis.tar.gz \
+    && curl -fsSL 'https://github.com/phpredis/phpredis/archive/4.2.0.tar.gz' -o redis.tar.gz \
     && mkdir -p redis \
     && tar -xf redis.tar.gz -C redis --strip-components=1 \
     && rm redis.tar.gz \
@@ -74,7 +75,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     ) \
     && rm -r imagick \
     # && pecl install memcached \
-    && curl -fsSL 'https://github.com/php-memcached-dev/php-memcached/archive/v3.0.4.tar.gz' -o memcached.tar.gz \
+    && curl -fsSL 'https://github.com/php-memcached-dev/php-memcached/archive/v3.1.3.tar.gz' -o memcached.tar.gz \
     && mkdir -p memcached \
     && tar -xf memcached.tar.gz -C memcached --strip-components=1 \
     && rm memcached.tar.gz \

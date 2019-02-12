@@ -48,6 +48,8 @@ services:
     networks:
       mynet:
         ipv4_address: 172.28.12.4
+    extra_hosts:
+      - "movielaravel.test:172.28.12.3"
   mysql:
     build: ./mysql
     ports:
@@ -64,6 +66,7 @@ services:
         ipv4_address: 172.28.12.5
   redis:
     build: ./redis
+    restart: always
     volumes:
       - $PWD/redis/data/:/data
     networks:

@@ -14,3 +14,5 @@
 /php/log/*.log
 /www/*
 !/www/.gitkeep
+/nginx/conf/vhost.d/*
+!/nginx/conf/vhost.d/default.conf
