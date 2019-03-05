@@ -52,6 +52,8 @@ services:
       - "movielaravel.test:172.28.12.3"
   mysql:
     build: ./mysql
+    # command:
+    #   - "--default-authentication-plugin=mysql_native_password"
     ports:
       - "33060:3306"
     restart: always

@@ -1,4 +1,4 @@
-FROM mysql:5.7
+FROM mysql:latest
 
 #  设置时区
 ENV TZ=Asia/Shanghai
