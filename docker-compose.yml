@@ -58,7 +58,7 @@ services:
       - "33060:3306"
     restart: always
     volumes:
-      - $PWD/mysql/data/:/var/lib/mysql
+      - ${DATA_PATH}/mysql/data/:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 123456789
       MYSQL_USER: crazyhl
@@ -70,7 +70,7 @@ services:
     build: ./redis
     restart: always
     volumes:
-      - $PWD/redis/data/:/data
+      - ${DATA_PATH}/redis/data/:/data
     networks:
       mynet:
         ipv4_address: 172.28.12.6
