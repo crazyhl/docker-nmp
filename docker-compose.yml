@@ -74,6 +74,17 @@ services:
     networks:
       mynet:
         ipv4_address: 172.28.12.6
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    networks:
+      mynet:
+        ipv4_address: 172.28.12.10
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "8088:80"
 networks:
   mynet:
     ipam:
