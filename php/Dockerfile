@@ -23,7 +23,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install bcmath bz2 calendar exif gd gettext gmp mysqli opcache pcntl pdo_mysql recode shmop soap sockets sysvmsg sysvsem sysvshm wddx xmlrpc zip \
     # && pecl install igbinary \
-    && curl -fsSL 'https://github.com/igbinary/igbinary/archive/2.0.8.tar.gz' -o igbinary.tar.gz \
+    && curl -fsSL 'https://github.com/igbinary/igbinary/archive/3.0.1.tar.gz' -o igbinary.tar.gz \
     && mkdir -p igbinary \
     && tar -xf igbinary.tar.gz -C igbinary --strip-components=1 \
     && rm igbinary.tar.gz \
@@ -36,7 +36,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     ) \
     && rm -r igbinary \
     # && pecl install msgpack \
-    && curl -fsSL 'https://github.com/msgpack/msgpack-php/archive/msgpack-2.0.3.tar.gz' -o msgpack-2.0.2.tar.gz \
+    && curl -fsSL 'https://github.com/msgpack/msgpack-php/archive/msgpack-2.0.3.tar.gz' -o msgpack.tar.gz \
     && mkdir -p msgpack \
     && tar -xf msgpack-2.0.2.tar.gz -C msgpack --strip-components=1 \
     && rm msgpack-2.0.2.tar.gz \
@@ -49,7 +49,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     ) \
     && rm -r msgpack \
     # && pecl install redis \
-    && curl -fsSL 'https://github.com/phpredis/phpredis/archive/4.2.0.tar.gz' -o redis.tar.gz \
+    && curl -fsSL 'https://github.com/phpredis/phpredis/archive/4.3.0.tar.gz' -o redis.tar.gz \
     && mkdir -p redis \
     && tar -xf redis.tar.gz -C redis --strip-components=1 \
     && rm redis.tar.gz \
