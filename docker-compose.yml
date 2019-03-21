@@ -14,7 +14,7 @@ services:
       - ./nginx/conf/fastcgi.conf:/etc/nginx/fastcgi.conf:ro
       - ./nginx/conf/expires.conf:/etc/nginx/expires.conf:ro
       # ssl 证书目录
-      # - ./nginx/conf/ssl:/etc/nginx/ssl:ro
+      # - ./nginx/ssl:/etc/nginx/ssl:ro
       # 虚拟主机目录
       - ./nginx/conf/vhost.d:/etc/nginx/vhost.d:ro
       # 默认首页目录
@@ -52,8 +52,6 @@ services:
       - "movielaravel.test:172.28.12.3"
   mysql:
     build: ./mysql
-    # command:
-    #   - "--default-authentication-plugin=mysql_native_password"
     ports:
       - "33060:3306"
     restart: always
