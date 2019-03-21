@@ -88,8 +88,8 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     ) \
     && rm -r memcached \
     && docker-php-ext-enable opcache igbinary msgpack redis imagick memcached \
-    && groupadd -g 500 www \
-    && useradd -u 500 -g www -s /sbin/nologin www \
+    && groupadd -g 1002 www \
+    && useradd -u 1002 -g www -s /sbin/nologin www \
     && mkdir -p /etc/cron.d/ \
     && touch /etc/cron.d/cron \
     && chmod 0644 /etc/cron.d/cron \
