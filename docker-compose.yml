@@ -39,9 +39,9 @@ services:
       # crontab
       - ./php/crontab/crontab:/etc/cron.d/cron
       # log root
-      - ./php/log:/var/log/php
+      - ./php/log:/var/log/php:rw
       # www root
-      - ./www:/var/www/
+      - ./www:/var/www/:rw
     depends_on:
       - mysql
       - redis
