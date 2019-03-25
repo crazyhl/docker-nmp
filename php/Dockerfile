@@ -38,8 +38,8 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     # && pecl install msgpack \
     && curl -fsSL 'https://github.com/msgpack/msgpack-php/archive/msgpack-2.0.3.tar.gz' -o msgpack.tar.gz \
     && mkdir -p msgpack \
-    && tar -xf msgpack-2.0.2.tar.gz -C msgpack --strip-components=1 \
-    && rm msgpack-2.0.2.tar.gz \
+    && tar -xf msgpack.tar.gz -C msgpack --strip-components=1 \
+    && rm msgpack.tar.gz \
     && ( \
         cd msgpack \
         && phpize \
