@@ -23,8 +23,8 @@ services:
       - ./nginx/log:/var/log/nginx
       # www root
       - ./www:/var/www/
-    depends_on:
-      - php
+    # depends_on:
+    #   - php
     networks:
       mynet:
         ipv4_address: 172.28.12.3
@@ -42,9 +42,9 @@ services:
       - ./php/log:/var/log/php:rw
       # www root
       - ./www:/var/www/:rw
-    depends_on:
-      - mysql
-      - redis
+    # depends_on:
+    #   - mysql
+    #   - redis
     networks:
       mynet:
         ipv4_address: 172.28.12.4
