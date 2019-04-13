@@ -6,7 +6,7 @@
 /code/*
 !/code/.gitkeep
 /nginx/vhost.d/*
-!/nginx/vhost.d/default.conf
+!/nginx/vhost.d/default.conf.sample
 /redis/data/*
 !/redis/data/.gitkeep
 /mysql/data/*

@@ -86,6 +86,16 @@ services:
       PMA_PORT: 3306
     ports:
       - "8088:80"
+    depends_on:
+      - mysql
+  node:
+    build: ./node
+    restart: always
+    volumes:
+      - ./www:/var/www/
+    networks:
+      mynet:
+        ipv4_address: 172.28.12.11
 networks:
   mynet:
     ipam:
