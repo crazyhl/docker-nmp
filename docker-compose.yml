@@ -90,12 +90,9 @@ services:
       - mysql
   node:
     build: ./node
-    restart: always
+    restart: "no"
     volumes:
       - ./www:/var/www/
-    networks:
-      mynet:
-        ipv4_address: 172.28.12.11
 networks:
   mynet:
     ipam:
