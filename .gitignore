@@ -5,8 +5,6 @@
 */.DS_Store
 /code/*
 !/code/.gitkeep
-/nginx/vhost.d/*
-!/nginx/vhost.d/default.conf.sample
 /redis/data/*
 !/redis/data/.gitkeep
 /mysql/data/*
@@ -15,3 +13,5 @@
 /www/*
 !/www/.gitkeep
 .env
+/nginx/conf/vhost.d/*
+!/nginx/conf/vhost.d/default.conf.sample
