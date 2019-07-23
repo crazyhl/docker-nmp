@@ -13,7 +13,7 @@ COPY ./conf/source.ali.list /etc/apt/sources.list
 # composer 设置国内镜像 安装 MySQL pdo
 # RUN composer config -g repo.packagist composer https://packagist.laravel-china.org
 
-RUN composer config -g repo.packagist composer https://packagist.laravel-china.org \
+RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
     && apt-get update && apt-get install -y libxml2-dev libpng-dev libgmp-dev libicu-dev cron libzip-dev libbz2-dev && rm -r /var/lib/apt/lists/* \
     && CFLAGS="-I/usr/src/php" \
     && docker-php-ext-configure hash --with-mhash \
