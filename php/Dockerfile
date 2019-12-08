@@ -1,4 +1,5 @@
-FROM php:fpm
+ARG phpVersion
+FROM php:${phpVersion}
 
 # 设置时区
 ENV TZ=Asia/Shanghai
@@ -25,7 +26,11 @@ RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/compos
     && mkdir -p /etc/cron.d/ \
     && touch /etc/cron.d/cron \
     && chmod 0644 /etc/cron.d/cron \
-    && chmod 777 /usr/local/bin/entrypoint.sh
+    && chmod 777 /usr/local/bin/entrypoint.sh \
+    && pecl install igbinary \
+    && pecl install msgpack \
+    && pecl install memcached \
+    && pecl install redis
 
 # && apt-get install -y cron \
 # RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
