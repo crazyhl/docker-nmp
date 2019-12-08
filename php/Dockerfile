@@ -15,12 +15,12 @@ COPY ./conf/source.ali.list /etc/apt/sources.list
 # RUN composer config -g repo.packagist composer https://packagist.laravel-china.org
 
 RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
-    && apt-get update && apt-get install -y libxml2-dev libpng-dev libgmp-dev libicu-dev cron libzip-dev libbz2-dev && rm -r /var/lib/apt/lists/* \
+    && apt-get update && apt-get install -y libxml2-dev libpng-dev libgmp-dev libicu-dev cron libmemcached-dev libzip-dev libbz2-dev && rm -r /var/lib/apt/lists/* \
     && CFLAGS="-I/usr/src/php" \
     && docker-php-ext-configure hash --with-mhash \
     && docker-php-ext-configure intl \
-    && docker-php-ext-configure zip --with-libzip \
-    && docker-php-ext-install bz2 exif gd gettext gmp opcache pcntl pdo_mysql shmop soap sockets sysvmsg sysvsem sysvshm wddx xmlrpc zip \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install bz2 exif gd gettext gmp opcache pcntl pdo_mysql shmop soap sockets sysvmsg sysvsem sysvshm xmlrpc zip \
     && groupadd -g 1002 www \
     && useradd -u 1002 -g www -s /sbin/nologin www \
     && mkdir -p /etc/cron.d/ \
