@@ -9,7 +9,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # 拷贝 入口文件
 COPY entrypoint.sh /usr/local/bin/
 # 拷贝 阿里云源
-COPY ./conf/source.ali.list /etc/apt/sources.list
+# COPY ./conf/source.ali.list /etc/apt/sources.list
 # composer 设置国内镜像 安装 MySQL pdo
 # RUN composer config -g repo.packagist composer https://packagist.laravel-china.org
 
