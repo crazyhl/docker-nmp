@@ -1,4 +1,5 @@
-FROM php:fpm
+ARG phpVersion
+FROM php:${phpVersion}
 
 # 设置时区
 ENV TZ=Asia/Shanghai
@@ -14,18 +15,22 @@ COPY entrypoint.sh /usr/local/bin/
 # RUN composer config -g repo.packagist composer https://packagist.laravel-china.org
 
 RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
-    && apt-get update && apt-get install -y libxml2-dev libpng-dev libgmp-dev libicu-dev cron libzip-dev libbz2-dev && rm -r /var/lib/apt/lists/* \
+    && apt-get update && apt-get install -y libxml2-dev libpng-dev libgmp-dev libicu-dev cron libmemcached-dev libzip-dev libbz2-dev && rm -r /var/lib/apt/lists/* \
     && CFLAGS="-I/usr/src/php" \
     && docker-php-ext-configure hash --with-mhash \
     && docker-php-ext-configure intl \
-    && docker-php-ext-configure zip --with-libzip \
-    && docker-php-ext-install bz2 exif gd gettext gmp opcache pcntl pdo_mysql shmop soap sockets sysvmsg sysvsem sysvshm wddx xmlrpc zip \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install bz2 exif gd gettext gmp opcache pcntl pdo_mysql shmop soap sockets sysvmsg sysvsem sysvshm xmlrpc zip \
     && groupadd -g 1002 www \
     && useradd -u 1002 -g www -s /sbin/nologin www \
     && mkdir -p /etc/cron.d/ \
     && touch /etc/cron.d/cron \
     && chmod 0644 /etc/cron.d/cron \
-    && chmod 777 /usr/local/bin/entrypoint.sh
+    && chmod 777 /usr/local/bin/entrypoint.sh \
+    && pecl install igbinary \
+    && pecl install msgpack \
+    && pecl install memcached \
+    && pecl install redis
 
 # && apt-get install -y cron \
 # RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \

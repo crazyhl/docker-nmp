@@ -1,7 +1,10 @@
 version: '3'
 services:
   nginx:
-    build: ./nginx
+    build: 
+      context: ./nginx
+      args:
+        ngxinxVersion: ${NGINX_VERSION}
     restart: always
     # 端口映射 本机端口:docker 端口
     ports:
@@ -29,7 +32,10 @@ services:
       mynet:
         ipv4_address: 172.28.12.3
   php:
-    build: ./php
+    build: 
+      context: ./php
+      args:
+        phpVersion: ${PHP_VERSION}
     restart: always
     volumes:
       # 配置目录
@@ -61,14 +67,17 @@ services:
     volumes:
       - ${DATA_PATH}/mysql/data/:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: 123456789
-      MYSQL_USER: crazyhl
-      MYSQL_PASSWORD: 123456789
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     networks:
       mynet:
         ipv4_address: 172.28.12.5
   redis:
-    build: ./redis
+    build: 
+      context: ./redis
+      args:
+        redisVersion: ${REDIS_VERSION}
     restart: always
     volumes:
       - ${DATA_PATH}/redis/data/:/data
@@ -76,7 +85,7 @@ services:
       mynet:
         ipv4_address: 172.28.12.6
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
+    image: phpmyadmin/phpmyadmin:${PHPMYADMIN_VERSION}
     restart: always
     networks:
       mynet:
@@ -89,7 +98,10 @@ services:
     depends_on:
       - mysql
   node:
-    build: ./node
+    build: 
+      context: ./node
+      args:
+        nodeVersion: ${NODE_VERSION}
     restart: "no"
     volumes:
       - ./www:/var/www/

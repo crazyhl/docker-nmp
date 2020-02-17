@@ -1,4 +1,5 @@
-FROM redis:latest
+ARG redisVersion
+FROM redis:${redisVersion}
 
 #  设置时区
 ENV TZ=Asia/Shanghai

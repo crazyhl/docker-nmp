@@ -1,4 +1,5 @@
-FROM node:latest
+ARG nodeVersion
+FROM node:${nodeVersion}
 
 # Global install yarn package manager
 RUN apt-get update && apt-get install -y curl apt-transport-https && \

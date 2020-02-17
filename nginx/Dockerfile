@@ -1,4 +1,5 @@
-FROM nginx:latest
+ARG ngxinxVersion
+FROM nginx:${ngxinxVersion}
 
 #  设置时区
 ENV TZ=Asia/Shanghai
