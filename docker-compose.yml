@@ -105,6 +105,22 @@ services:
     restart: "no"
     volumes:
       - ./www:/var/www/
+  mongo:
+    build: 
+      context: ./mongo
+      args:
+        mongoVersion: ${MONGO_VERSION}
+    restart: always
+    volumes:
+      - ${DATA_PATH}/mongo/data/:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    ports:
+      - "27017:27017"
+    networks:
+      mynet:
+        ipv4_address: 172.28.12.20
 networks:
   mynet:
     ipam:

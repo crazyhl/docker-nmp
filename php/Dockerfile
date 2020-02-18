@@ -10,12 +10,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # 拷贝 入口文件
 COPY entrypoint.sh /usr/local/bin/
 # 拷贝 阿里云源
-# COPY ./conf/source.ali.list /etc/apt/sources.list
+COPY ./conf/source.ali.list /etc/apt/sources.list
 # composer 设置国内镜像 安装 MySQL pdo
 # RUN composer config -g repo.packagist composer https://packagist.laravel-china.org
 
 RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
-    && apt-get update && apt-get install -y libxml2-dev libpng-dev libgmp-dev libicu-dev cron libmemcached-dev libzip-dev libbz2-dev && rm -r /var/lib/apt/lists/* \
+    && apt-get update && apt-get install -y libxml2-dev libpng-dev libgmp-dev libicu-dev cron libmemcached-dev libzip-dev libbz2-dev zip unzip && rm -r /var/lib/apt/lists/* \
     && CFLAGS="-I/usr/src/php" \
     && docker-php-ext-configure hash --with-mhash \
     && docker-php-ext-configure intl \
@@ -30,7 +30,8 @@ RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/compos
     && pecl install igbinary \
     && pecl install msgpack \
     && pecl install memcached \
-    && pecl install redis
+    && pecl install redis \
+    && pecl install mongodb
 
 # && apt-get install -y cron \
 # RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
