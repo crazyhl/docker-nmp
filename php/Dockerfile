@@ -15,7 +15,7 @@ COPY ./conf/source.ali.list /etc/apt/sources.list
 # RUN composer config -g repo.packagist composer https://packagist.laravel-china.org
 
 RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
-    && apt-get update && apt-get install -y libxml2-dev libpng-dev libgmp-dev libicu-dev cron libmemcached-dev libzip-dev libbz2-dev zip unzip && rm -r /var/lib/apt/lists/* \
+    && apt-get update && apt-get install -y libxml2-dev libpng-dev libgmp-dev libicu-dev cron libmemcached-dev libzip-dev libbz2-dev zip openssl libssl-dev && rm -r /var/lib/apt/lists/* \
     && CFLAGS="-I/usr/src/php" \
     && docker-php-ext-configure hash --with-mhash \
     && docker-php-ext-configure intl \

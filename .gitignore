@@ -15,3 +15,5 @@
 .env
 /nginx/conf/vhost.d/*
 !/nginx/conf/vhost.d/default.conf.sample
+/jenkins/jenkins_home/*
+!/jenkins/jenkins_home/.gitkeep
