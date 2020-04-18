@@ -20,7 +20,7 @@ RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/compos
     && docker-php-ext-configure hash --with-mhash \
     && docker-php-ext-configure intl \
     && docker-php-ext-configure zip \
-    && docker-php-ext-install bz2 exif gd gettext gmp opcache pcntl pdo_mysql shmop soap sockets sysvmsg sysvsem sysvshm xmlrpc zip \
+    && docker-php-ext-install bz2 exif gd gettext gmp opcache pcntl pdo_mysql mysqli shmop soap sockets sysvmsg sysvsem sysvshm xmlrpc zip \
     && groupadd -g 1002 www \
     && useradd -u 1002 -g www -s /sbin/nologin www \
     && mkdir -p /etc/cron.d/ \
