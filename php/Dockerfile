@@ -32,7 +32,13 @@ RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/compos
     && pecl install memcached \
     && pecl install redis \
     && pecl install mongodb \
-    && pecl install swoole --enable-openssl --enable-http2
+    # && pecl install swoole --enable-openssl --enable-http2
+    && pecl install --onlyreqdeps --nobuild swoole \
+    && cd "$(pecl config-get temp_dir)/swoole" \
+    && phpize \
+    && ./configure --enable-openssl --enable-http2 \
+    && make && make install  \
+    && rm -rf $(pecl config-get temp_dir)/swoole
 
 # && apt-get install -y cron \
 # RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
