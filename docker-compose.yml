@@ -51,6 +51,9 @@ services:
     # depends_on:
     #   - mysql
     #   - redis
+    # 端口映射 本机端口:docker 端口
+    ports:
+      - "10890:10890"
     networks:
       mynet:
         ipv4_address: 172.28.12.4

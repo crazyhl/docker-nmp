@@ -31,7 +31,8 @@ RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/compos
     && pecl install msgpack \
     && pecl install memcached \
     && pecl install redis \
-    && pecl install mongodb
+    && pecl install mongodb \
+    && pecl install swoole --enable-openssl --enable-http2
 
 # && apt-get install -y cron \
 # RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
